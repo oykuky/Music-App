@@ -2,7 +2,7 @@ import React from 'react'
 
 function Center() {
   return (
-    <div className='bg-sky-950 mx-2 mt-2 rounded-lg'>
+    <div className='bg-fuchsia-950 mx-2 mt-2 rounded-lg w-screen'>
       vg
     </div>
   )
