@@ -6,7 +6,7 @@ import Image from 'next/image';
 function Navbar() {
   const [search,setSearch] = useState();
   return (
-    <div className= 'sticky flex justify-between items-center my-1 px-5 md:px-3'>
+    <div className= 'sticky h-20 flex justify-between items-center my px-5 md:px-3 bg-red-400'>
       <div className='items-center justify-center flex md:pl-80 lg:pl-96 '>
         <div className='rounded-full items-center bg-gray-800 m-2 p-3 hover:bg-gray-400'>
          <IoIosHome className='text-gray-600 text-[25px]' />

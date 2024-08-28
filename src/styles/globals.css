@@ -2,13 +2,3 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
- 
-}
-
-
-body {
-  background-color:#644c94;
-  color:aliceblue;
-  font-size: 17px;
-}
