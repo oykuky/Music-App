@@ -6,13 +6,13 @@ import Image from 'next/image';
 function Navbar() {
   const [search,setSearch] = useState();
   return (
-    <div className= 'sticky h-20 flex justify-between items-center my px-5 md:px-3 bg-black bg-opacity-50'>
-      <div className=''>
-      <img src='/logo.svg' className='bg-yellow-400 rounded-full w-30 h-30 p-1'></img>
+    <div className= 'sticky h-20 flex justify-between items-center px-4 md:px-3 bg-black bg-opacity-50 my-2'>
+      <div>
+       <img src='/logo.svg' className='bg-yellow-400 rounded-full w-30 h-30 p-1'></img>
       </div>
       <div className='items-center justify-center flex md:pl-80 lg:pl-96 '>
-        <div className='rounded-full items-center bg-gray-800 m-2 p-3 hover:bg-gray-500'>
-         <IoIosHome className='text-gray-600 text-[25px]' />
+        <div className='rounded-full items-center mr-3 bg-gray-800 p-3 hover:bg-gray-500'>
+         <IoIosHome className='text-gray-600 text-[28px]' />
         </div>
         <div className='items-center hover:bg-gray-500 flex h-full rounded-full px-5 bg-gray-800 sm:w-80 lg:w-[450px]'>
           <IoSearch className="text-[25px] text-gray-600 "/>
