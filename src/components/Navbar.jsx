@@ -3,6 +3,7 @@ import { IoSearch } from "react-icons/io5";
 import { IoIosHome } from "react-icons/io";
 import Image from 'next/image';
 
+
 function Navbar() {
   const [search,setSearch] = useState();
   return (
