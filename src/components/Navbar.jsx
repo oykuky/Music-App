@@ -8,7 +8,7 @@ function Navbar() {
   return (
     <div className= 'sticky h-20 flex justify-between items-center px-4 md:px-3 bg-black bg-opacity-50 my-2'>
       <div>
-       <img src='/logo.svg' className='bg-yellow-400 rounded-full w-30 h-30 p-1'></img>
+       <img src='/logo.svg' className='bg-yellow-500 rounded-full w-30 h-30 p-1'></img>
       </div>
       <div className='items-center justify-center flex md:pl-80 lg:pl-96 '>
         <div className='rounded-full items-center mr-3 bg-gray-800 p-3 hover:bg-gray-500'>
