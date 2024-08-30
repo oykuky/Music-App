@@ -1,9 +1,14 @@
 import React from 'react'
 import { googleLogout, useGoogleLogin } from '@react-oauth/google';
+import { useRouter } from 'next/router';
 
 function Login() {
-  const login=useGoogleLogin({
-    onSuccess:(codeResp)=>GetUserProfile(codeResp),
+  const router = useRouter();
+  const login = useGoogleLogin({
+    onSuccess:(codeResp)=>{
+      console.log(codeResp)
+      router.push('/');
+    },
     onError:(error)=>console.log(error)
   })
   return (
