@@ -11,17 +11,17 @@ const AppWrapper = ({ children }) => {
 
   return (
     <div className="flex flex-col min-h-screen h-screen bg-black">
-      <SessionProvider session={session}>
-      <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}>
-        {!isAuthPage && <Navbar />}
-        <div className="flex flex-cols h-full space-x-2 p-2">
-          {!isAuthPage && <Sidebar />}
-          <div className="w-full h-[calc(100vh-8rem)] rounded-lg">
-            {children}
+      <SessionProvider>
+        <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}>
+          {!isAuthPage && <Navbar />}
+          <div className="flex flex-cols h-full space-x-2 p-2">
+            {!isAuthPage && <Sidebar />}
+            <div className="w-full h-[calc(100vh-8rem)] rounded-lg">
+              {children}
+            </div>
           </div>
-        </div>
-        {!isAuthPage && <Player />}
-      </GoogleOAuthProvider>;
+          {!isAuthPage && <Player />}
+        </GoogleOAuthProvider>;
       </SessionProvider>
     </div>
   );

@@ -25,7 +25,7 @@ function Navbar() {
           </input>
         </div>
       </div>
-      <div className='sm:pl-2'>
+      <div className='border-yellow-600 border-[4px] rounded-full'>
         <Image src='/noavatar.png' width={45} height={45} className='rounded-full cursor-pointer'/>
       </div>
     </div>
