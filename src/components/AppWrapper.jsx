@@ -11,7 +11,7 @@ const AppWrapper = ({ children }) => {
 
   return (
     <div className="flex flex-col min-h-screen h-screen bg-black">
-      <SessionProvider>
+      <SessionProvider session={session}>
       <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}>
         {!isAuthPage && <Navbar />}
         <div className="flex flex-cols h-full space-x-2 p-2">
