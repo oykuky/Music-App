@@ -1,23 +1,69 @@
+// import mongoose from "mongoose";
+// const connection = {};
+
+// export const connectToDb = async () => {
+//     try {
+//         if(connection.isConnected){
+//             console.log("using existing connection");
+//             return;
+//         }
+//        const db =  await mongoose.connect(process.env.NEXT_PUBLIC_MONGO) ;
+//        connection.isConnected = db.connections[0].readyState;
+//        console.log("mongo db ", connection.isConnected )
+//        console.log("mongo db connected")
+//       } catch (error) {
+//         console.log(error);
+//         throw new Error(error)
+//       }
+// }
+
 import mongoose from "mongoose";
-const connection = {};
+
 
 const connectToDb = async () => {
+    console.log("process.env.NEXT_PUBLIC_MONGO",process.env.NEXT_PUBLIC_MONGO)
+    console.log("mongoose",mongoose);
+    console.log("Mongoose connect function:", mongoose.connect);
+    if(mongoose.connections[0].readyState){
+        console.log("using existing connection");
+        return true;
+    }
     try {
-        if(connection.isConnected){
-            console.log("using existing connection");
-            return;
-        }
-       const db =  await mongoose.connect(process.env.NEXT_PUBLIC_MONGO) ;
-       connection.isConnected = db.connections[0].readyState;
-       console.log("mongo db ", connection.isConnected )
-       console.log("mongo db connected")
+        await mongoose.connect(process.env.NEXT_PUBLIC_MONGO) ;
+        console.log("mongo connection successful");
+        return true;
       } catch (error) {
         console.log(error);
         throw new Error(error)
       }
 }
 
- export default connectToDb;
+export default connectToDb; 
+// const mongoose = require("mongoose");
+// const connection = {};
+
+// export const connectToDb = async () => {
+//     console.log("mongoose",mongoose);
+//     console.log("Mongoose connect function:", mongoose.connect);
+
+//     try {
+//         if (connection.isConnected) {
+//             console.log("Mevcut bağlantı kullanılıyor");
+//             return;
+//         }
+
+//         const db = await mongoose.connect(process.env.NEXT_PUBLIC_MONGO, {
+//             useNewUrlParser: true,
+//             useUnifiedTopology: true,
+//         });
+//         connection.isConnected = db.connections[0].readyState;
+//         console.log("MongoDB'ye başarıyla bağlanıldı");
+//     } catch (error) {
+//         console.log("Bağlantı hatası:", error);
+//         throw new Error(error);
+//     }
+// };
+
 
 // import mongoose from "mongoose";
 
