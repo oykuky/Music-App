@@ -5,10 +5,11 @@ import Sidebar from "./Sidebar";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { SessionProvider } from 'next-auth/react'
 
+
+
 const AppWrapper = ({ children }) => {
   const router = useRouter();
   const isAuthPage = ["/login", "/register"].includes(router.pathname); // Giriş veya Kayıt sayfasıysa
-
   return (
     <div className="flex flex-col min-h-screen h-screen bg-black">
       <SessionProvider>
