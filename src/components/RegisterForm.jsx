@@ -36,7 +36,6 @@
 
 // export default RegisterForm
 
-import { register } from '@/lib/action';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React from 'react';
@@ -44,17 +43,41 @@ import React from 'react';
 function RegisterForm() {
   const router = useRouter();
 
+  // const handleSubmit = async (event) => {
+  //   event.preventDefault();
+  //   const formData = new FormData(event.target);
+  //   const response = await register(formData);
+
+  //   if (response.success) {
+  //     router.push('/'); // Başarılı işlemden sonra ana sayfaya yönlendir
+  //   } else if (response.error) {
+  //     alert(response.error); // Hata mesajı göster
+  //   }
+  // };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
-    const response = await register(formData);
-
-    if (response.success) {
-      router.push('/'); // Başarılı işlemden sonra ana sayfaya yönlendir
-    } else if (response.error) {
-      alert(response.error); // Hata mesajı göster
+    const formDataObj = Object.fromEntries(formData);
+    console.log("formDataObjformDataObj",formDataObj);
+    
+    const response = await fetch('/api/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formDataObj),
+    });
+  
+    const data = await response.json();
+  
+    if (data.success) {
+      router.push('/');
+    } else if (data.error) {
+      alert(data.error);
     }
   };
+  
 
   return (
     <div>
