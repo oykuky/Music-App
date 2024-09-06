@@ -29,7 +29,6 @@ function Navbar() {
         <Image src='/noavatar.png' width={45} height={45} className='rounded-full cursor-pointer'/>
       </div>
     </div>
-  
   )
 }
 
