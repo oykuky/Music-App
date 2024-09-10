@@ -2,7 +2,7 @@
 
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { connectToDb } from "@/lib/utils";
+import connectToDb from "@/lib/utils";
 import { User } from "@/lib/model";
 
 // Kullanıcı girişini doğrulayan ve kullanıcıyı döndüren asenkron fonksiyon
@@ -10,15 +10,17 @@ const login = async (credentials) => {
     try {
       await connectToDb();
       const user = await User.findOne({ username: credentials.username });
-
-      if (!user) throw new Error("Wrong credentials!");
-
-      const isPasswordCorrect = (credentials.password === user.password);
-      if (!isPasswordCorrect) throw new Error("Wrong credentials!");
+      
+      if (!user) throw new Error("Wrong credentials user not found!");
+      console.log("User:", user);
+      if (!credentials.password === user.password) throw new Error("Wrong credentials(password)!");
       return user;
     } catch (err) {
       console.log('Login Error:', err.message); // Hata mesajını loglayın
+      console.log("Credentials:", credentials);
+
       throw new Error("Failed to login!");
+      
     }
 };
 
