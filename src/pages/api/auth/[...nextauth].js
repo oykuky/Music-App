@@ -3,7 +3,7 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import connectToDb from "@/lib/utils";
-import { User } from "@/lib/model";
+import  User  from "@/lib/model";
 
 // Kullanıcı girişini doğrulayan ve kullanıcıyı döndüren asenkron fonksiyon
 const login = async (credentials) => {
