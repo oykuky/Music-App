@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Select from 'react-select'
-import SongCard from '@/components/songCard';
+import SongCard from '@/components/SongCard';
 
 function Explore() {
   const [songs, setSongs] = useState([]);
