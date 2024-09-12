@@ -2,13 +2,17 @@ import React, { useState } from 'react'
 import { IoSearch } from "react-icons/io5";
 import { IoIosHome } from "react-icons/io";
 import Image from 'next/image';
-import { useSession } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
+import { useRouter } from 'next/router';
 
 
 function Navbar() {
   const [search,setSearch] = useState();
+  const router = useRouter();
   const {data:session} = useSession();
-  console.log("SESİİON",session);
+  const logOut = async() =>{
+    await signOut();
+  }
   return (
     <div className= 'h-20 flex justify-between items-center px-4 md:px-3 bg-black bg-opacity-50 my-2'>
       <div>
@@ -33,7 +37,7 @@ function Navbar() {
         (
           <div className='flex justify-center items-center gap-2'>
             <div>
-             <button className="text-white bg-yellow-400 hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300 font-semibold rounded-full text-m px-5 py-2.5 text-center me-2 dark:focus:ring-yellow-900">Log out</button>
+             <button onClick={logOut} className="text-white bg-yellow-400 hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300 font-semibold rounded-full text-m px-5 py-2.5 text-center me-2 dark:focus:ring-yellow-900">Log out</button>
             </div>
             <div className='border-yellow-600 border-[4px] rounded-full '>
              <Image src='/noavatar.png' alt ="profileimg" width={40} height={40} className='rounded-full cursor-pointer'/>
@@ -42,7 +46,7 @@ function Navbar() {
         )
        : 
         (<div>
-          <button className="text-white bg-yellow-400 hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300 font-semibold rounded-full text-m px-5 py-2.5 text-center me-2 mb-2 dark:focus:ring-yellow-900">Login</button>) 
+          <button onClick={()=>router.push('/login')} className="text-white bg-yellow-400 hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300 font-semibold rounded-full text-m px-5 py-2.5 text-center me-2 mb-2 dark:focus:ring-yellow-900">Login</button>) 
         </div> )
       }
      </div>
