@@ -15,7 +15,7 @@ const AppWrapper = ({ children }) => {
       <SessionProvider>
         <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}>
           {!isAuthPage && <Navbar />}
-          <div className="flex flex-cols h-full space-x-2 p-2">
+          <div className="flex flex-cols h-full space-x-2">
             {!isAuthPage && <Sidebar />}
             <div className="w-full h-[calc(100vh-8rem)] rounded-lg">
               {children}

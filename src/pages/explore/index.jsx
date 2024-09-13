@@ -22,7 +22,7 @@ function Explore() {
     }),
   };
   return (
-    <div className="w-full h-full bg-gradient-to-t from-green-900 via-yellow-600 to-pink-400 bg-opacity-50 rounded-lg overflow-hidden">
+    <div className="w-full h-full bg-gradient-to-t from-green-900 via-yellow-600 to-pink-400 bg-opacity-50 rounded-lg overflow-y-auto">
       <div className='rounded-b-2xl mx-12 mb-33 px-4 h-24 flex items-center gap-9 bg-gray-950 opacity-55'>
           <h3 className='text-white font-semibold text-[24px] ml-12'>Chart by City</h3>
           <Select
@@ -34,7 +34,13 @@ function Explore() {
           placeholder="Select city"
         />
       </div>
-      <div className='grid grid-cols-3 gap-2'>
+      <div className='flex-wrap flex justify-center gap-2'>
+      <SongCard/>
+      <SongCard/>
+      <SongCard/>
+      <SongCard/>
+      <SongCard/>
+      <SongCard/>
       <SongCard/>
       <SongCard/>
       <SongCard/>
