@@ -9,8 +9,8 @@ export const fetchTopCharts = createAsyncThunk(
         method: 'GET',
         url: 'https://shazam-core.p.rapidapi.com/v1/charts/world',
         headers: {
-          'x-rapidapi-key': '0867da32cdmshf729ecc4e583415p18c2c4jsn6865dca4afcc',
-          'x-rapidapi-host': 'shazam-core.p.rapidapi.com'
+          'x-Rapidapi-key': '0867da32cdmshf729ecc4e583415p18c2c4jsn6865dca4afcc',
+          'x-Rapidapi-host': 'shazam-core.p.rapidapi.com'
         }
     };
 
