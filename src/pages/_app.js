@@ -1,11 +1,14 @@
 import AppWrapper from "@/components/AppWrapper";
-import { store } from "@/redux/app/store";
+import { store } from "@/redux/store";
 import "@/styles/globals.css";
+import { Provider } from "react-redux";
 
 export default function App({ Component, pageProps }) {
   return (
-    <AppWrapper store={store}>
+    <Provider store={store}>
+    <AppWrapper >
       <Component {...pageProps} />
     </AppWrapper>
+    </Provider>
   );
 }
