@@ -11,7 +11,7 @@ function Sidebar() {
   const router = useRouter();
   const isActive = (pathname) => router.pathname === pathname;
   return(
-   <div className="bg-black bg-opacity-50 h-full w-1/5 rounded-lg text-white font-semibold gap-2 flex flex-col">
+   <div className="bg-black bg-opacity-50 h-full w-1/5 rounded-lg text-white font-semibold gap-3 flex flex-col">
       <Link href="/" 
          className={`flex flex-row gap-2 items-center  ${isActive("/") ? "text-yellow-300" : "text-white"}
          rounded-full p-2 m-2`}>

@@ -19,11 +19,11 @@ function Navbar() {
        <img src='/logo.svg' alt ="logo" className='bg-yellow-500 rounded-full w-30 h-30 p-1'></img>
       </div>
       <div className='items-center justify-center flex'>
-        <div className='rounded-full items-center mr-3 bg-gray-800 p-3 hover:bg-gray-500'>
-         <IoIosHome className='text-gray-600 text-[28px]' />
+        <div className='rounded-full items-center mr-3 bg-gray-900 p-3 hover:bg-gray-600'>
+         <IoIosHome className='text-gray-500 text-[28px]' />
         </div>
-        <div className='items-center hover:bg-gray-500 flex h-full rounded-full px-5 bg-gray-800 sm:w-80 lg:w-[450px]'>
-          <IoSearch className="text-[25px] text-gray-600 "/>
+        <div className='items-center hover:bg-gray-600 flex h-full rounded-full px-5 bg-gray-900 sm:w-80 lg:w-[450px]'>
+          <IoSearch className="text-[25px] text-gray-500 "/>
           <input
             type="text" name="search" value={search}
             placeholder='What do you want to play ?'
