@@ -19,11 +19,11 @@ function Navbar() {
        <img src='/logo.svg' alt ="logo" className='bg-yellow-500 rounded-full w-30 h-30 p-1'></img>
       </div>
       <div className='items-center justify-center flex'>
-        <div className='rounded-full items-center mr-3 bg-gray-900 p-3 hover:bg-gray-600'>
-         <IoIosHome className='text-gray-500 text-[28px]' />
-        </div>
-        <div className='items-center hover:bg-gray-600 flex h-full rounded-full px-5 bg-gray-900 sm:w-80 lg:w-[450px]'>
-          <IoSearch className="text-[25px] text-gray-500 "/>
+        <button onClick={()=>router.push('/')} className='rounded-full items-center mr-3 bg-gray-900 p-3 cursor-pointer'>
+         <IoIosHome className='text-gray-500 hover:text-white text-[28px]' />
+        </button>
+        <div className='items-center flex h-full rounded-full px-5 bg-gray-900 sm:w-80 lg:w-[450px]'>
+          <IoSearch className="text-[25px] text-gray-500  hover:text-white "/>
           <input
             type="text" name="search" value={search}
             placeholder='What do you want to play ?'
@@ -39,7 +39,7 @@ function Navbar() {
             <div>
              <button onClick={logOut} className="text-white bg-yellow-400 hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300 font-semibold rounded-full text-m px-5 py-2.5 text-center me-2 dark:focus:ring-yellow-900">Log out</button>
             </div>
-            <div className='border-yellow-600 border-[4px] rounded-full '>
+            <div className='rounded-full '>
              <Image src='/noavatar.png' alt ="profileimg" width={40} height={40} className='rounded-full cursor-pointer'/>
             </div>
           </div>

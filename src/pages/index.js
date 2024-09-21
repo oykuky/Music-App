@@ -27,7 +27,7 @@ export default function Home() {
        <div className='rounded-b-xl mx-12 px-4 h-24 flex items-center gap-9 bg-gray-950 opacity-55'>
           <h3 className='text-white font-semibold text-[24px] ml-12'>World Chart 🌎</h3>
           <div>
-      <h1>Top Charts</h1>
+      <h1> Top Charts</h1>
       {/* <ul>
         {topCharts.map((track) => (
           <li key={track.id}>{track.title} - {track.artist}</li>
