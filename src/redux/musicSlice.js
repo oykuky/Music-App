@@ -1,44 +1,48 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-
-// API isteği için async thunk oluşturuyoruz
-export const fetchTopCharts = createAsyncThunk(
-  'music/fetchTopCharts',
-  async () => {
-    const options = {
+//FETCH THE ARTIST
+export const fetchMusic = createAsyncThunk(
+  'music/fetchMusic',
+  async (artistName, { rejectWithValue }) => {
+    try {
+      const options = {
         method: 'GET',
-        url: 'https://shazam-core.p.rapidapi.com/v1/charts/world',
+        url: 'https://deezerdevs-deezer.p.rapidapi.com/search',
+        params: { q: artistName },
         headers: {
-          'x-Rapidapi-key': '0867da32cdmshf729ecc4e583415p18c2c4jsn6865dca4afcc',
-          'x-Rapidapi-host': 'shazam-core.p.rapidapi.com'
+          'X-RapidAPI-Key': '0867da32cdmshf729ecc4e583415p18c2c4jsn6865dca4afcc',
+          'X-RapidAPI-Host': 'deezerdevs-deezer.p.rapidapi.com'
         }
-    };
+      };
 
-    const response = await axios.request(options);
-    return response.data;
+      const response = await axios.request(options);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
   }
 );
 
 const musicSlice = createSlice({
   name: 'music',
   initialState: {
-    topCharts: [],
+    songs: [],
     status: 'idle',
     error: null
   },
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchTopCharts.pending, (state) => {
+      .addCase(fetchMusic.pending, (state) => {
         state.status = 'loading';
       })
-      .addCase(fetchTopCharts.fulfilled, (state, action) => {
+      .addCase(fetchMusic.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        state.topCharts = action.payload;
+        state.songs = action.payload.data;
       })
-      .addCase(fetchTopCharts.rejected, (state, action) => {
+      .addCase(fetchMusic.rejected, (state, action) => {
         state.status = 'failed';
-        state.error = action.error.message;
+        state.error = action.payload || 'An error occurred';
       });
   },
 });
