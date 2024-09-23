@@ -38,7 +38,7 @@ useEffect(() => {
           {status === 'loading' && (
             <div className="flex justify-center items-center mt-10">
             <div className="loader">
-             <AiOutlineLoading3Quarters/>
+             <AiOutlineLoading3Quarters className="animate-spin text-4xl"/>
             </div>
           </div>
           )}
