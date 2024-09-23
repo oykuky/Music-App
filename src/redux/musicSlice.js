@@ -10,7 +10,7 @@ export const fetchMusic = createAsyncThunk(
         url: 'https://deezerdevs-deezer.p.rapidapi.com/search',
         params: { q: artistName },
         headers: {
-          'X-RapidAPI-Key': '0867da32cdmshf729ecc4e583415p18c2c4jsn6865dca4afcc',
+          'X-RapidAPI-Key': process.env.NEXT_PUBLIC_API_KEY ,
           'X-RapidAPI-Host': 'deezerdevs-deezer.p.rapidapi.com'
         }
       };
