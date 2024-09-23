@@ -4,6 +4,7 @@ import Player from "./Player";
 import Sidebar from "./Sidebar";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { SessionProvider } from 'next-auth/react'
+import MusicPlayer from "./MusicPlayer";
 
 
 
@@ -17,8 +18,9 @@ const AppWrapper = ({ children }) => {
           {!isAuthPage && <Navbar />}
           <div className="flex flex-cols h-full space-x-2">
             {!isAuthPage && <Sidebar />}
-            <div className="w-full h-[calc(100vh-8rem)] rounded-lg">
+            <div className="w-full md:h-[calc(100vh-10rem)] h-[calc(100vh-8rem)] rounded-lg">
               {children}
+            <MusicPlayer/>
             </div>
           </div>
           {!isAuthPage && <Player />}

@@ -9,6 +9,7 @@ function Explore() {
   const [debouncedArtist, setDebouncedArtist] = useState('');
   const dispatch = useDispatch();
   const { songs, status, error } = useSelector((state) => state.music);
+  console.log("song: " , songs)
 
  // Debounce: Kullanıcı her yazdığında 500ms bekler, sonra fetch işlemi başlar
  useEffect(() => {

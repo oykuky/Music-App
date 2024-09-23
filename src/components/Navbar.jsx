@@ -28,7 +28,7 @@ function Navbar() {
             type="text" name="search" value={search}
             placeholder='What do you want to play ?'
             onChange={(e)=>setSearch(e.target.value)}
-            className='outline-none bg-transparent p-3 w-full'>
+            className='outline-none text-white bg-transparent p-3 w-full'>
           </input>
         </div>
       </div>
