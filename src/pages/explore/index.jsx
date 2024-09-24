@@ -7,7 +7,10 @@ import { AiOutlineLoading3Quarters } from "react-icons/ai";
 function Explore() {
   const [artist, setArtist] = useState('');
   const [debouncedArtist, setDebouncedArtist] = useState('');
+
+  // Redux dispatch fonksiyonu ile action (fetchMusic) çağrılır
   const dispatch = useDispatch();
+  //store'dan state'e erişmek için
   const { songs, status, error } = useSelector((state) => state.music);
   console.log("song: " , songs)
 
@@ -28,7 +31,6 @@ useEffect(() => {
     dispatch(fetchMusic(debouncedArtist));
   }
 }, [debouncedArtist, dispatch]);
-
   return (
     <div className="w-full h-full bg-gradient-to-t from-black to-purple-600 bg-opacity-50 rounded-lg overflow-y-auto">
       <div className='rounded-b-xl mx-12 mb-33 px-4 h-24 flex items-center gap-9 bg-gray-950 opacity-55'>

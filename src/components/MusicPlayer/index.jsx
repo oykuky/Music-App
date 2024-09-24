@@ -6,7 +6,7 @@ import Player from './Player';
 import Seekbar from './Seekbar';
 import Track from './Track';
 import VolumeBar from './VolumeBar';
-import { playPause } from '@/redux/playerSlice';
+import { playPause, nextSong, prevSong } from '@/redux/playerSlice';
 
 const MusicPlayer = () => {
   const { activeSong, currentSongs, currentIndex, isActive, isPlaying } = useSelector((state) => state.player);
@@ -19,8 +19,10 @@ const MusicPlayer = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (currentSongs.length) dispatch(playPause(true));
-  }, [currentIndex]);
+    if (currentSongs && currentSongs.length) {
+      dispatch(playPause(true));
+    }
+  }, [currentIndex, currentSongs, dispatch]);
 
   const handlePlayPause = () => {
     if (!isActive) return;

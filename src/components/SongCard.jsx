@@ -1,10 +1,18 @@
 import Image from 'next/image'
 import React from 'react'
 import { MdFavoriteBorder } from "react-icons/md";
-import { CgPlayButtonO } from "react-icons/cg";
 import { GiPlayButton } from "react-icons/gi";
+import { useDispatch, useSelector } from 'react-redux';
+import { playPause, setActiveSong } from '@/redux/playerSlice';
 
-function SongCard({song}) {
+function SongCard({song,data,i}) {
+  const dispatch = useDispatch();
+  const {activeSong, isPlaying} = useSelector((state)=>state.player)
+
+  const handlePlayClick = ()=>{
+    dispatch(setActiveSong ({song,data,i }));
+    dispatch(playPause(true))
+  }
   return (
     <div className='mx-3'>
       <div className='flex flex-col justify-between gap-2 mt-7 rounded-lg bg-black bg-opacity-60 text-gray-800 w-[305px] h-[450px] md:w-[250px] md:h-[410px] cursor-pointer hover:scale-105 hover:shadow-2xl transition-transform duration-300'>
@@ -13,7 +21,7 @@ function SongCard({song}) {
           <div className='bg-transparent rounded-full cursor-pointer items-center flex justify-center mt-1 ml-1 hover:bg-purple-800 transition-colors duration-300 w-10 h-10'>
             <MdFavoriteBorder className="h-8 w-8 md:h-10 md:w-10 fill-white"/>
           </div>
-          <div className='bg-transparent border-white border-2 justify-center flex items-center h-8 w-8 md:h-10 md:w-10 rounded-full cursor-pointer mt-1 hover:bg-purple-800 transition-colors duration-300'>
+          <div onClick={handlePlayClick} className='bg-transparent border-white border-2 justify-center flex items-center h-8 w-8 md:h-10 md:w-10 rounded-full cursor-pointer mt-1 hover:bg-purple-800 transition-colors duration-300'>
             <GiPlayButton className="h-5 w-5 md:h-8 md:w-8 fill-yellow-300" />  
           </div>
         </div>
