@@ -5,7 +5,7 @@ const initialState = {
   currentIndex: 0,
   isActive: false,
   isPlaying: false,
-  activeSong:  {}, 
+  activeSong: {},
   genreListId: '',
 };
 
@@ -16,12 +16,14 @@ const playerSlice = createSlice({
     setActiveSong: (state, action) => {
       state.activeSong = action.payload.song;
 
-      if (action.payload?.data?.tracks?.hits) {
+      if (Array.isArray(action.payload.data)) {
+        state.currentSongs = action.payload.data;
+      } else if (action.payload?.data?.tracks?.hits) {
         state.currentSongs = action.payload.data.tracks.hits;
       } else if (action.payload?.data?.properties) {
         state.currentSongs = action.payload?.data?.tracks;
       } else {
-        state.currentSongs = action.payload.data;
+        state.currentSongs = [];
       }
 
       state.currentIndex = action.payload.i;
@@ -29,25 +31,29 @@ const playerSlice = createSlice({
     },
 
     nextSong: (state, action) => {
-      if (state.currentSongs[action.payload]?.track) {
-        state.activeSong = state.currentSongs[action.payload]?.track;
-      } else {
-        state.activeSong = state.currentSongs[action.payload];
-      }
+      if (state.currentSongs.length > 0) {
+        if (state.currentSongs[action.payload]?.track) {
+          state.activeSong = state.currentSongs[action.payload]?.track;
+        } else {
+          state.activeSong = state.currentSongs[action.payload];
+        }
 
-      state.currentIndex = action.payload;
-      state.isActive = true;
+        state.currentIndex = action.payload;
+        state.isActive = true;
+      }
     },
 
     prevSong: (state, action) => {
-      if (state.currentSongs[action.payload]?.track) {
-        state.activeSong = state.currentSongs[action.payload]?.track;
-      } else {
-        state.activeSong = state.currentSongs[action.payload];
-      }
+      if (state.currentSongs.length > 0) {
+        if (state.currentSongs[action.payload]?.track) {
+          state.activeSong = state.currentSongs[action.payload]?.track;
+        } else {
+          state.activeSong = state.currentSongs[action.payload];
+        }
 
-      state.currentIndex = action.payload;
-      state.isActive = true;
+        state.currentIndex = action.payload;
+        state.isActive = true;
+      }
     },
 
     playPause: (state, action) => {
