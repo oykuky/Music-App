@@ -3,13 +3,20 @@ import React from 'react'
 import { googleLogout, useGoogleLogin } from '@react-oauth/google';
 import { useRouter } from 'next/router';
 import LoginForm from '@/components/LoginForm';
+import { useSession } from 'next-auth/react';
+
 
 
 function Login() {
   const router = useRouter();
+  const { data: session } = useSession();
+
   const login = useGoogleLogin({
     onSuccess:(codeResp)=>{
       console.log(codeResp)
+      if (session && session.user) {
+        localStorage.setItem('userId', session.user.email); // Kullanıcı id'sini localStorage'a kaydedin
+      }
       router.push('/');
     },
     onError:(error)=>console.log(error)

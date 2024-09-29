@@ -1,18 +1,19 @@
 'use client'
-import { signIn } from 'next-auth/react';
+import { signIn, useSession } from 'next-auth/react';
 import Link from 'next/link'
 import { useRouter } from 'next/router';
-import React from 'react'
+import React, { useEffect } from 'react'
 
 
 function LoginForm() {
   const router = useRouter();
+  const { data: session } = useSession();
+
   const handleSubmit = async (event) => {
     event.preventDefault(); 
     const formData = new FormData(event.target); 
     const username = formData.get('username');
     const password = formData.get('password');
-    
     try {
       const result = await signIn('credentials', {
         username,
@@ -22,8 +23,8 @@ function LoginForm() {
 
       if (result?.error) {
         alert(result.error); // Giriş hatasını göster
-        console.log("result", result)
-      } else {
+        console.log("result", result);
+      } else {  
         router.push('/'); // Başarılı girişten sonra yönlendirme
       }
     } catch (error) {
@@ -31,6 +32,13 @@ function LoginForm() {
       alert('Something went wrong');
     }
   };
+
+  useEffect(() => {
+    if (session && session.user) {
+      // Kullanıcı bilgisi güncellenmişse, localStorage'a kaydet
+      localStorage.setItem('userId', session.user.email);
+    }
+  }, [session]); // Session değiştikçe bu effect çalışır
 
   return (
     <div>
