@@ -1,12 +1,9 @@
 import mongoose from "mongoose";
-import User from "./model";
 const connection = {};
 
 const connectToDb = async () => {
-    console.log("process.env.NEXT_PUBLIC_MONGO",process.env.NEXT_PUBLIC_MONGO)
     // console.log("mongoose",mongoose);
     console.log("Mongoose connect function:", mongoose.connect);
-    console.log("User model:", User);
     try {
       if(mongoose.connections[0].readyState){
           console.log("using existing connection");

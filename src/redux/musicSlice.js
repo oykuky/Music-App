@@ -33,12 +33,15 @@ const musicSlice = createSlice({
     error: null
   },
   reducers: {
-    toggleFavorite : (state,action) => {
-      const songId = action.payload;
+    toggleFavoriteRedux: (state,action) => {
+      const songId = action.payload; //şarkının id'si
       const isFavorite = state.favorites.some((song) =>song.id === songId);
+      // some() metodu, bir dizideki en az bir öğenin belirtilen koşulu sağladığını kontrol eder ve true veya false döner
+      //some() fonksiyonu, bu şarkı zaten favorilerde mi diye kontrol eder
       
       if(isFavorite){
         state.favorites = state.favorites.filter((song)=> song.id !== songId);
+        //filter() belirli bir koşulu sağlayan öğeleri içeren yeni bir dizi döndürür
         //favori listeisinde çıkar 
       }else {
         //favorilere ekle
@@ -49,10 +52,10 @@ const musicSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchMusic.pending, (state) => {
+      .addCase(fetchMusic.pending, (state) => {  //API isteği başlarken
         state.status = 'loading';
       })
-      .addCase(fetchMusic.fulfilled, (state, action) => {
+      .addCase(fetchMusic.fulfilled, (state, action) => { // İstek başarılı olduğunda
         state.status = 'succeeded';
         state.songs = action.payload.data;
       })
@@ -64,4 +67,4 @@ const musicSlice = createSlice({
 });
 
 export default musicSlice.reducer;
-export const { toggleFavorite } = musicSlice.actions;
+export const { toggleFavoriteRedux } = musicSlice.actions;

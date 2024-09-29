@@ -1,9 +1,12 @@
+import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import React from 'react';
+import React, { useEffect } from 'react';
 
 function RegisterForm() {
   const router = useRouter();
+  const { data: session } = useSession();
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.target); // Form verilerini alır ve bir FormData nesnesine dönüştürür.
@@ -25,6 +28,12 @@ function RegisterForm() {
       alert(data.error);
     }
   };
+  useEffect(() => {
+    if (session && session.user) {
+      // Kullanıcı bilgisi güncellenmişse, localStorage'a kaydet
+      localStorage.setItem('userId', session.user.email);
+    }
+  }, [session]); // Session değiştikçe bu effect çalışır
   return (
     <div>
       <form className='flex flex-col gap-10' onSubmit={handleSubmit}>
