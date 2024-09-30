@@ -12,7 +12,7 @@ function SongCard({song,data,i}) {
   const favorites = useSelector((state)=>state.music.favorites)
   const isFavorite = favorites.some((fav)=> fav.id === song.id)
 
-  const handlePlayClick = ()=>{
+  const handlePlayClick = ()=> {
     dispatch(setActiveSong ({song,data,i }));
     dispatch(playPause(true))
   }

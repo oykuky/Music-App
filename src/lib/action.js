@@ -4,18 +4,18 @@ import User from "./model";
 import {toggleFavoriteRedux} from "@/redux/musicSlice";
 
 
-export const getUser = async(id)=>{
-  noStore();
-  try {
-    await connectToDb();
-    const user = await User.findById(id);
-    console.log("user",user);
-    return user;
-  } catch (err) {
-    console.log(err);
-    throw new Error("Failed to fetch user!");
-  }
-  }
+// export const getUser = async(id)=>{
+//   noStore();
+//   try {
+//     await connectToDb();
+//     const user = await User.findById(id);
+//     console.log("user",user);
+//     return user;
+//   } catch (err) {
+//     console.log(err);
+//     throw new Error("Failed to fetch user!");
+//   }
+//   }
 
   // export const upFavorites = async (userId,song) => { ///db'ye kaydeder
   //   try {
@@ -40,10 +40,12 @@ export const getUser = async(id)=>{
   //     throw new Error("Failed to update favorites");
   //   }
   // }
+  
   export const upFavorites = async (userId, song) => {
     try {
       console.log("Connecting to DB...");
       await connectToDb();
+      console.log()
       console.log("Connected to DB. Searching for user with email:", userId);
   
       const user = await User.findOne({ email: userId });
@@ -74,7 +76,7 @@ export const getUser = async(id)=>{
   }
 
 
-    //db'yi günceller
+  //  db'yi günceller
     // export const toggleFavoriteAsync = (song) => async (dispatch) => {
     //   const userId = localStorage.getItem('userId'); // Kullanıcı id'sini localStorage'dan alın
     //   if (!userId) {
@@ -95,8 +97,7 @@ export const getUser = async(id)=>{
 
     export const toggleFavoriteAsync = (song) => async (dispatch) => {
       const userId = localStorage.getItem('userId');
-      console.log("UserId from localStorage:", userId);
-    
+  
       if (!userId) {
         console.error("Kullanıcı ID'si bulunamadı.");
         return;
@@ -109,6 +110,5 @@ export const getUser = async(id)=>{
       } catch (err) {
         console.error("Failed to update favorites in DB:", err);
         // Hata durumunda Redux state'ini geri alıyoruz
-        dispatch(toggleFavoriteRedux(song.id));
       }
     };
