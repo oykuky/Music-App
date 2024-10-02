@@ -23,6 +23,52 @@ export const fetchMusic = createAsyncThunk(
   }
 );
 
+export const fetchFavorites = createAsyncThunk(
+  'music/fetchFavorites',
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await fetch('/api/favorites');
+      
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Failed to fetch favorites');
+      }
+      
+      const data = await response.json();
+      return data.favorites;
+    } catch (error) {
+      console.error("Fetch Favorites Error:", error);
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const toggleFavorite = createAsyncThunk(
+  'music/toggleFavorite',
+  async (song, { rejectWithValue }) => {
+    try {
+      const response = await fetch('/api/favorites', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ song }),
+      });
+      
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Failed to toggle favorite');
+      }
+      
+      const data = await response.json();
+      return data.favorites;
+    } catch (error) {
+      console.error("Toggle Favorite Error:", error);
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
 
 const musicSlice = createSlice({
   name: 'music',
@@ -63,8 +109,39 @@ const musicSlice = createSlice({
         state.status = 'failed';
         state.error = action.payload || 'An error occurred';
       })
+     
+      .addCase(fetchFavorites.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(fetchFavorites.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.favorites = action.payload;
+        state.error = null;
+      })
+      .addCase(fetchFavorites.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.payload;
+      })
+      .addCase(toggleFavorite.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(toggleFavorite.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.favorites = action.payload;
+        state.error = null;
+      })
+      .addCase(toggleFavorite.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.payload;
+      });
   },
 });
 
 export default musicSlice.reducer;
 export const { toggleFavoriteRedux } = musicSlice.actions;
+
+
+
+
+
+
