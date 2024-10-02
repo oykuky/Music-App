@@ -15,7 +15,7 @@ export const fetchMusic = createAsyncThunk(
         }
       };
 
-      const response = await axios.request(options);
+      const response = await axios.request(options);//api isteği yapılır
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data);
@@ -23,11 +23,12 @@ export const fetchMusic = createAsyncThunk(
   }
 );
 
+//Favori şarkıları getirmek işlemi
 export const fetchFavorites = createAsyncThunk(
   'music/fetchFavorites',
   async (_, { rejectWithValue }) => {
     try {
-      const response = await fetch('/api/favorites');
+      const response = await fetch('/api/favorites');// Favori şarkıları almak için API isteği yapılır(GET)
       
       if (!response.ok) {
         const errorData = await response.json();
@@ -35,7 +36,7 @@ export const fetchFavorites = createAsyncThunk(
       }
       
       const data = await response.json();
-      return data.favorites;
+      return data.favorites;// Favori şarkılar döndürülür
     } catch (error) {
       console.error("Fetch Favorites Error:", error);
       return rejectWithValue(error.message);
@@ -43,16 +44,17 @@ export const fetchFavorites = createAsyncThunk(
   }
 );
 
+// FAVORİ ŞARKI EKLEME VEYA ÇIKARMA İŞLEMİ (toggleFavorite)
 export const toggleFavorite = createAsyncThunk(
   'music/toggleFavorite',
   async (song, { rejectWithValue }) => {
     try {
       const response = await fetch('/api/favorites', {
-        method: 'POST',
+        method: 'POST', // POST isteği, favori ekleme veya çıkarma için
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ song }),
+        body: JSON.stringify({ song }),// Şarkı bilgisi isteğe eklenir
       });
       
       if (!response.ok) {
@@ -61,7 +63,7 @@ export const toggleFavorite = createAsyncThunk(
       }
       
       const data = await response.json();
-      return data.favorites;
+      return data.favorites;// Güncellenen favori şarkılar listesi döndürülür
     } catch (error) {
       console.error("Toggle Favorite Error:", error);
       return rejectWithValue(error.message);
@@ -78,24 +80,7 @@ const musicSlice = createSlice({
     status: 'idle',
     error: null
   },
-  reducers: {
-    toggleFavoriteRedux: (state,action) => {
-      const songId = action.payload; //şarkının id'si
-      const isFavorite = state.favorites.some((song) =>song.id === songId);
-      // some() metodu, bir dizideki en az bir öğenin belirtilen koşulu sağladığını kontrol eder ve true veya false döner
-      //some() fonksiyonu, bu şarkı zaten favorilerde mi diye kontrol eder
-      
-      if(isFavorite){
-        state.favorites = state.favorites.filter((song)=> song.id !== songId);
-        //filter() belirli bir koşulu sağlayan öğeleri içeren yeni bir dizi döndürür
-        //favori listeisinde çıkar 
-      }else {
-        //favorilere ekle
-        const addSong = state.songs.find((song)=> song.id === songId) 
-        if(addSong) state.favorites.push(addSong);
-      }
-    }
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(fetchMusic.pending, (state) => {  //API isteği başlarken
@@ -127,7 +112,7 @@ const musicSlice = createSlice({
       })
       .addCase(toggleFavorite.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        state.favorites = action.payload;
+        state.favorites = action.payload; // Güncellenen favori şarkılar state'e eklenir
         state.error = null;
       })
       .addCase(toggleFavorite.rejected, (state, action) => {
@@ -138,7 +123,6 @@ const musicSlice = createSlice({
 });
 
 export default musicSlice.reducer;
-export const { toggleFavoriteRedux } = musicSlice.actions;
 
 
 

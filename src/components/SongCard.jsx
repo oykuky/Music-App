@@ -1,6 +1,6 @@
 'use client';
 import Image from 'next/image'
-import React, { useState } from 'react'
+import React from 'react'
 import { MdFavoriteBorder } from "react-icons/md";
 import { GiPlayButton } from "react-icons/gi";
 import { playPause, setActiveSong } from '@/redux/playerSlice';
@@ -42,7 +42,7 @@ function SongCard({ song, data, i }) {
             <GiPlayButton className="h-5 w-5 md:h-8 md:w-8 fill-white p-1" />
           </div>
         </div>
-        <h2 className='text-white font-bold text-xl px-3'>{song?.title_short}</h2>
+        <h2 className='text-white font-bold text-xl px-3'>{song?.title}</h2>
         <p className='text-white font-semibold px-3 mb-3'>{song?.artist.name}</p>
       </div>
     </div>
