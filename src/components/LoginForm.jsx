@@ -7,7 +7,6 @@ import React, { useEffect } from 'react'
 
 function LoginForm() {
   const router = useRouter();
-  const { data: session } = useSession();
 
   const handleSubmit = async (event) => {
     event.preventDefault(); 
