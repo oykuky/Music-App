@@ -4,7 +4,8 @@ import { MdFavoriteBorder } from "react-icons/md";
 import { GiPlayButton } from "react-icons/gi";
 import { useDispatch, useSelector } from 'react-redux';
 import { playPause, setActiveSong } from '@/redux/playerSlice';
-import { toggleFavoriteAsync } from '@/lib/action';
+import { toggleFavoriteAsync } from '@/lib/favrRedux';
+
 
 function SongCard({song,data,i}) {
   const dispatch = useDispatch();
@@ -16,8 +17,15 @@ function SongCard({song,data,i}) {
     dispatch(setActiveSong ({song,data,i }));
     dispatch(playPause(true))
   }
+  // const handleFavoriteClick = () => {
+  //   dispatch(toggleFavoriteAsync(song)); // Şarkıyı favorilere ekle/çıkar
+  // };
   const handleFavoriteClick = () => {
-    dispatch(toggleFavoriteAsync(song)); // Şarkıyı favorilere ekle/çıkar
+    try {
+      dispatch(toggleFavoriteAsync(song));
+    } catch (error) {
+      console.error('Failed to toggle favorite:', error);
+    }
   };
   return (
     <div className='mx-3'>

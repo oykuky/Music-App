@@ -32,14 +32,6 @@ function LoginForm() {
       alert('Something went wrong');
     }
   };
-
-  useEffect(() => {
-    if (session && session.user) {
-      // Kullanıcı bilgisi güncellenmişse, localStorage'a kaydet
-      localStorage.setItem('userId', session.user.email);
-    }
-  }, [session]); // Session değiştikçe bu effect çalışır
-
   return (
     <div>
         <form className='flex flex-col gap-10' onSubmit={handleSubmit}>

@@ -1,6 +1,14 @@
 import mongoose from 'mongoose';
 
 const UserSchema = new mongoose.Schema({
+  userId: { 
+    type: String, 
+    required: true, 
+    unique: true,
+    default: function() {
+      return this._id.toString();
+    }
+  },
   username: { type: String, required: true, unique: true },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
@@ -19,5 +27,3 @@ const UserSchema = new mongoose.Schema({
 
 const User = mongoose.models?.User || mongoose.model('User', UserSchema);
 export default User;
-
-// Schema.Types.Mixed ile farklı türde veriler saklanabilir.
