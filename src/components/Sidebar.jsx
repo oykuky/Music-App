@@ -18,7 +18,7 @@ function Sidebar() {
         <IoIosHome className='h-8 w-8'/>
         <h3>Home</h3>
       </Link>
-      <Link href="/playlistLibrariy"className={`flex flex-row gap-2 items-center  ${isActive("") ? "text-yellow-300" : "text-white"}
+      <Link href="/playlistLibrariy" className={`flex flex-row gap-2 items-center  ${isActive("/playlistLibrariy") ? "text-yellow-300" : "text-white"}
         rounded-full p-2 m-2`}>
         <BiLibrary  className='h-8 w-8' />
         <h3>Library</h3>
