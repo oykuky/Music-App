@@ -37,7 +37,7 @@ function Navbar() {
         (
           <div className='flex justify-center items-center gap-2'>
             <div>
-             <button onClick={logOut} className="text-white bg-yellow-400 hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300 font-semibold rounded-full text-m px-5 py-2.5 text-center me-2 dark:focus:ring-yellow-900">Log out</button>
+             <button onClick={logOut} className="text-white border-purple-400 border-2 hover:bg-purple-500 hover:text-black focus:outline-none focus:ring-4 focus:ring-yellow-300 font-semibold rounded-full text-m px-5 py-2.5 text-center me-2 dark:focus:ring-yellow-900 transition-all ">Log out</button>
             </div>
             <div className='rounded-full '>
              <Image src='/noavatar.png' alt ="profileimg" width={40} height={40} className='rounded-full cursor-pointer'/>

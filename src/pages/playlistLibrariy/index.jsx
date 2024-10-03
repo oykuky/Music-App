@@ -24,11 +24,11 @@ function PlaylistLibrariy() {
           <h3 className='text-white font-semibold text-[24px] ml-12'>Playlist</h3>
       </div>
 
-        <div className='flex-col flex justify-center items-center lg:px-16 md:px-12 sm:px-10 px-8'>
+      <div className='flex-col flex justify-center items-center lg:px-16 md:px-12 sm:px-10 px-8'>
             {favorites.map((song, i) => (
               <PlaylistCard key={song.id} song={song} i={i} data={[]} />
             ))}
-        </div>
+      </div>
     
     </div>
   );
