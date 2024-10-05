@@ -3,13 +3,14 @@ import React from 'react'
 
 function Register() {
   return (
-    <div className='bg-gray-800 bg-opacity-50 h-screen flex justify-center items-center'>
-      <div className='flex flex-col w-[600px] h-[600px] gap-20 text-center rounded-lg bg-gradient-to-r
-      from-green-900 via-yellow-600 to-pink-400 items-center justify-center'>
-        <RegisterForm/>
+    <div className='bg-gray-900 min-h-screen flex justify-center items-center p-4'>
+      <div className='w-full max-w-md rounded-xl bg-gradient-to-r from-green-800 via-yellow-700 to-pink-800 p-1'>
+        <div className='bg-gray-900 rounded-lg p-8'>
+          <h1 className='text-3xl font-bold text-center text-white mb-8'>Register</h1>
+          <RegisterForm />
+        </div>
       </div>
-  </div>
-
+    </div>
   )
 }
 
