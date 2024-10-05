@@ -22,7 +22,18 @@ const UserSchema = new mongoose.Schema({
       cover: String
     },
     preview: String
-  }]
+  }],
+  playlist: [{
+    id: Number,
+    title: String,
+    artist: {
+      name: String
+    },
+    album: {
+      cover: String
+    },
+    preview: String
+  }],
 });
 
 const User = mongoose.models?.User || mongoose.model('User', UserSchema);
