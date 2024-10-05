@@ -3,12 +3,13 @@ import Image from 'next/image'
 import React from 'react'
 import { MdFavoriteBorder } from "react-icons/md";
 import { GiPlayButton } from "react-icons/gi";
-import { IoMdAdd } from "react-icons/io";
+import { IoIosCheckmarkCircleOutline, IoMdAdd } from "react-icons/io";
 import { playPause, setActiveSong } from '@/redux/playerSlice';
 import { useSession } from 'next-auth/react';
 import { useDispatch, useSelector } from 'react-redux';
-import { toggleFavorite } from '@/redux/musicSlice';
+import { toggleFavorite, togglePlaylist } from '@/redux/musicSlice';
 import { useRouter } from 'next/navigation';
+
 
 function SongCard({ song, data, i }) {
   const dispatch = useDispatch();
@@ -17,6 +18,8 @@ function SongCard({ song, data, i }) {
   const { activeSong, isPlaying } = useSelector((state) => state.player);
   const favorites = useSelector((state) => state.music.favorites);
   const isFavorite = favorites.some((fav) => fav.id === song.id);
+  const playlist = useSelector((state) => state.music.playlist)
+  const isPlaylist = playlist.some((p)=>p.id === song.id)
 
   const handlePlayClick = () => {
     dispatch(setActiveSong({ song, data, i }));
@@ -30,7 +33,6 @@ function SongCard({ song, data, i }) {
     }
     dispatch(toggleFavorite(song));
   };
-
   const handlePlaylistClick = () => {
     if (!session) {
       router.push('/login');
@@ -53,17 +55,13 @@ function SongCard({ song, data, i }) {
           </div>
           <h2 className='text-white font-bold text-xl px-3'>{song?.title}</h2>
           <p className='text-white font-semibold px-3 mb-3'>{song?.artist.name}</p>
-          <div className='flex justify-center ml-auto mr-2 mb-2 items-center h-10 w-10 rounded-full cursor-pointer hover:bg-gradient-to-l from-yellow-400 to-purple-600 transition-colors duration-300 '>
-              <IoMdAdd className="h-5 w-5 md:h-8 md:w-8 fill-white p-1" />
-          </div>
-
-           {/* <div className='justify-center flex flex-end mr-2 items-center h-10 w-10 rounded-full cursor-pointer hover:bg-gradient-to-l from-yellow-400 to-purple-600 transition-colors duration-300'>
+          <div onClick={handlePlaylistClick} className='justify-center flex ml-auto mr-2 items-center h-10 w-10 rounded-full cursor-pointer hover:bg-gradient-to-l from-yellow-400 to-purple-600 transition-colors duration-300'>
             {isPlaylist ? 
-            (<TiTick className="h-5 w-5 md:h-8 md:w-8 fill-white p-1" />)
+            (<IoIosCheckmarkCircleOutline className="h-5 w-5 md:h-8 md:w-8 fill-white p-1"/>)
             :
             (<IoMdAdd className="h-5 w-5 md:h-8 md:w-8 fill-white p-1" />)
             }
-      </div> */}
+          </div>
       </div>
     </div>
   );

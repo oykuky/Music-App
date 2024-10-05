@@ -3,52 +3,59 @@ import { playPause, setActiveSong } from '@/redux/playerSlice';
 import Image from 'next/image'
 import React from 'react'
 import { GiPlayButton } from 'react-icons/gi';
-import { TiTick } from "react-icons/ti";
-import { IoMdAdd } from 'react-icons/io';
+import { IoIosCheckmarkCircleOutline, IoMdAdd } from 'react-icons/io';
 import { useDispatch, useSelector } from 'react-redux';
+import { togglePlaylist } from '@/redux/musicSlice';
+import { useRouter } from 'next/router';
+import { useSession } from 'next-auth/react';
 
 function PlaylistCard({ song, data, i }) {
-  const dispatch = useDispatch();
-  const { activeSong, isPlaying } = useSelector((state) => state.player);
+    const { data: session } = useSession()
+    const dispatch = useDispatch();
+    const router = useRouter();
+    const { activeSong, isPlaying } = useSelector((state) => state.player);
+    const playlist = useSelector((state) => state.music.playlist)
+    const isPlaylist = playlist.some((p) => p.id === song.id)
 
-  const handlePlayClick = () => {
-    dispatch(setActiveSong({ song, data, i }));
-    dispatch(playPause(true));
-  };
+    const handlePlayClick = () => {
+        dispatch(setActiveSong({ song, data, i }));
+        dispatch(playPause(true));
+    };
+    const handlePlaylistClick = () => {
+        if (!session) {
+            router.push('/login');
+            return;
+        }
+        dispatch(togglePlaylist(song));
+    };
 
-  return (
-  <div className='flex items-center mt-7 rounded-lg bg-purple-950 bg-opacity-60 w-full
+    return (
+        <div className='flex items-center mt-7 rounded-lg bg-purple-950 bg-opacity-60 w-full
        hover:bg-transparent h-[70px] md:h-[70px]
        cursor-pointer hover:shadow-xl transition-transform duration-300'>
-      <div className='grid grid-cols-2 w-full gap-12 items-center '>
-          <div className='flex flex-row items-center'>
-              <Image src={song?.album.cover} alt={song.title} width={70} height={70} className='rounded-tl-lg rounded-bl-lg shrink-0 mr-3' />
-              <div className='flex flex-col gap-y-1.5 items-start justify-start '>
-                  <h2 className='text-white font-semibold text-md line-clamp-1'>{song?.title}</h2>
-                  <p className='text-gray-300 font-semibold text-sm hover:underline line-clamp-1'>{song?.artist.name}</p>
-              </div>
-          </div>
-          {/* <p className='text-white font-semibold'>{song?.album.title}</p> */}
-          <p className='text-white font-semibold px-5'>{song?.artist.name}</p>
-      </div>
-      <div onClick={handlePlayClick} className='bg-transparent justify-center flex flex-end mr-2 items-center h-10 w-10 rounded-lg cursor-pointer mt-1 hover:bg-gradient-to-l from-yellow-400 to-purple-600 transition-colors duration-300'>
-          <GiPlayButton className="h-5 w-5 md:h-8 md:w-8 fill-white p-1" />
-      </div>
-
-      <div className='justify-center flex flex-end mr-2 items-center h-10 w-10 rounded-full cursor-pointer hover:bg-gradient-to-l from-yellow-400 to-purple-600 transition-colors duration-300'>
-            <IoMdAdd className="h-5 w-5 md:h-8 md:w-8 fill-white p-1" />
-      </div>
-    
-      {/* <div className='justify-center flex flex-end mr-2 items-center h-10 w-10 rounded-full cursor-pointer hover:bg-gradient-to-l from-yellow-400 to-purple-600 transition-colors duration-300'>
-            {isPlaylist ? 
-            (<TiTick className="h-5 w-5 md:h-8 md:w-8 fill-white p-1" />)
-            :
-            (<IoMdAdd className="h-5 w-5 md:h-8 md:w-8 fill-white p-1" />)
-            }
-      </div> */}
-
-  </div>
-  )
+            <div className='grid grid-cols-2 w-full gap-12 items-center '>
+                <div className='flex flex-row items-center'>
+                    <Image src={song?.album.cover} alt={song.title} width={70} height={70} className='rounded-tl-lg rounded-bl-lg shrink-0 mr-3' />
+                    <div className='flex flex-col gap-y-1.5 items-start justify-start '>
+                        <h2 className='text-white font-semibold text-md line-clamp-1'>{song?.title}</h2>
+                        <p className='text-gray-300 font-semibold text-sm hover:underline line-clamp-1'>{song?.artist.name}</p>
+                    </div>
+                </div>
+                {/* <p className='text-white font-semibold'>{song?.album.title}</p> */}
+                <p className='text-white font-semibold px-5'>{song?.artist.name}</p>
+            </div>
+            <div onClick={handlePlayClick} className='bg-transparent justify-center flex flex-end mr-2 items-center h-10 w-10 rounded-lg cursor-pointer mt-1 hover:bg-gradient-to-l from-yellow-400 to-purple-600 transition-colors duration-300'>
+                <GiPlayButton className="h-5 w-5 md:h-8 md:w-8 fill-white p-1" />
+            </div>
+            <div onClick={handlePlaylistClick} className='justify-center flex ml-auto mr-2 items-center h-10 w-10 rounded-lg cursor-pointer hover:bg-gradient-to-l from-yellow-400 to-purple-600 transition-colors duration-300'>
+                {isPlaylist ?
+                    (<IoIosCheckmarkCircleOutline className="h-5 w-5 md:h-8 md:w-8 fill-white p-1" />)
+                    :
+                    (<IoMdAdd className="h-5 w-5 md:h-8 md:w-8 fill-white p-1" />)
+                }
+            </div>
+        </div>
+    )
 }
 
 export default PlaylistCard

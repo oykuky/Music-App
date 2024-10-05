@@ -1,5 +1,5 @@
 import PlaylistCard from '@/components/PlaylistCard';
-import { fetchFavorites } from '@/redux/musicSlice';
+import { fetchPlaylist } from '@/redux/musicSlice';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import React, { useEffect } from 'react';
@@ -11,10 +11,10 @@ import { useDispatch, useSelector } from 'react-redux';
 function PlaylistLibrariy() {
   const dispatch = useDispatch();
   const { data: session } = useSession();
-  const favorites = useSelector((state) => state.music.favorites); // Favorileri al
+  const playlist = useSelector((state) => state.music.playlist); // Favorileri al
   useEffect(() => {
     if (session) {
-      dispatch(fetchFavorites());
+      dispatch(fetchPlaylist());
     }
   }, [session, dispatch]);// Favorileri al
 
@@ -25,7 +25,7 @@ function PlaylistLibrariy() {
       </div>
 
       <div className='flex-col flex justify-center items-center lg:px-16 md:px-12 sm:px-10 px-8'>
-            {favorites.map((song, i) => (
+            {playlist.map((song, i) => (
               <PlaylistCard key={song.id} song={song} i={i} data={[]} />
             ))}
       </div>

@@ -71,12 +71,59 @@ export const toggleFavorite = createAsyncThunk(
   }
 );
 
+export const fetchPlaylist = createAsyncThunk(
+  'music/fetchPlaylist',
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await fetch('/api/playlist');// playlist şarkılarını almak için API isteği yapılır(GET)
+      
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Failed to fetch playlist');
+      }
+      
+      const data = await response.json();
+      return data.playlist;
+    } catch (error) {
+      console.error("Fetch Playlist Error:", error);
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const togglePlaylist = createAsyncThunk(
+  'music/togglePlaylist',
+  async(song,{rejectWithValue}) => {
+    try {
+      const response = await fetch('/api/playlist', {
+        method: 'POST', // POST isteği, ekleme veya çıkarma için
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ song }),// Şarkı bilgisi isteğe eklenir
+      });
+      
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Failed to toggle playlist');
+      }
+      
+      const data = await response.json();
+      return data.playlist;
+    } catch (error) {
+      console.error("Toggle Playlist Error:", error);
+      return rejectWithValue(error.message);
+    }
+  }
+)
+
 
 const musicSlice = createSlice({
   name: 'music',
   initialState: {
     songs: [],
     favorites: [],
+    playlist:[],   
     status: 'idle',
     error: null
   },
@@ -116,6 +163,31 @@ const musicSlice = createSlice({
         state.error = null;
       })
       .addCase(toggleFavorite.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.payload;
+      })
+
+      .addCase(fetchPlaylist.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(fetchPlaylist.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.playlist = action.payload;
+        state.error = null;
+      })
+      .addCase(fetchPlaylist.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.payload;
+      })
+      .addCase(togglePlaylist.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(togglePlaylist.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.playlist = action.payload; // Güncellenen favori şarkılar state'e eklenir
+        state.error = null;
+      })
+      .addCase(togglePlaylist.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.payload;
       });
