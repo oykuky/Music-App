@@ -10,8 +10,6 @@ import { useSession } from 'next-auth/react';
 import { TiDeleteOutline } from "react-icons/ti";
 import { styled } from '@mui/material/styles';
 import Tooltip, {tooltipClasses } from '@mui/material/Tooltip';
-import Typography from '@mui/material/Typography';
-
 
 const BootstrapTooltip = styled(({ className, ...props }) => (
     <Tooltip {...props} arrow classes={{ popper: className }} />
