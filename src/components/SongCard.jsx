@@ -11,6 +11,7 @@ import { toggleFavorite, togglePlaylist } from '@/redux/musicSlice';
 import { useRouter } from 'next/navigation';
 import { styled } from '@mui/material/styles';
 import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
+import toast, { Toaster } from 'react-hot-toast';
 
 const BootstrapTooltip = styled(({ className, ...props }) => (
   <Tooltip {...props} arrow classes={{ popper: className }} />

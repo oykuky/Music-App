@@ -9,18 +9,20 @@ import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
 import { TiDeleteOutline } from "react-icons/ti";
 import { styled } from '@mui/material/styles';
-import Tooltip, {tooltipClasses } from '@mui/material/Tooltip';
+import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
+import toast, { Toaster } from 'react-hot-toast';
+
 
 const BootstrapTooltip = styled(({ className, ...props }) => (
     <Tooltip {...props} arrow classes={{ popper: className }} />
-  ))(({ theme }) => ({
+))(({ theme }) => ({
     [`& .${tooltipClasses.arrow}`]: {
-      color: theme.palette.common.black,
+        color: theme.palette.common.black,
     },
     [`& .${tooltipClasses.tooltip}`]: {
-      backgroundColor: theme.palette.common.black,
+        backgroundColor: theme.palette.common.black,
     },
-  }));
+}));
 
 function PlaylistCard({ song, data, i }) {
     const { data: session } = useSession()
@@ -32,12 +34,14 @@ function PlaylistCard({ song, data, i }) {
         dispatch(setActiveSong({ song, data, i }));
         dispatch(playPause(true));
     };
+    const notify = () => toast('Song deleted from Playlist !');
     const handlePlaylistClick = () => {
         if (!session) {
             router.push('/login');
             return;
         }
         dispatch(togglePlaylist(song));
+        notify();
     };
 
     return (
@@ -59,6 +63,7 @@ function PlaylistCard({ song, data, i }) {
                 <GiPlayButton className="h-5 w-5 md:h-8 md:w-8 fill-white p-1" />
             </div>
             <BootstrapTooltip title="Delete" placement="top">
+                <Toaster/>
                 <div onClick={handlePlaylistClick} className='justify-center flex ml-auto mr-2 items-center h-10 w-10 rounded-lg cursor-pointer hover:bg-gradient-to-l from-yellow-400 to-purple-600 transition-colors duration-300'>
                     <TiDeleteOutline className="h-5 w-5 md:h-8 md:w-8 fill-white p-1" />
                 </div>
