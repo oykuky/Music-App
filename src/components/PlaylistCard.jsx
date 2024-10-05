@@ -34,14 +34,14 @@ function PlaylistCard({ song, data, i }) {
         dispatch(setActiveSong({ song, data, i }));
         dispatch(playPause(true));
     };
-    const notify = () => toast('Song deleted from Playlist !');
+    
     const handlePlaylistClick = () => {
         if (!session) {
             router.push('/login');
             return;
         }
         dispatch(togglePlaylist(song));
-        notify();
+        toast.success('Song removed from playlist',{position:'bottom-left'});
     };
 
     return (
@@ -63,7 +63,7 @@ function PlaylistCard({ song, data, i }) {
                 <GiPlayButton className="h-5 w-5 md:h-8 md:w-8 fill-white p-1" />
             </div>
             <BootstrapTooltip title="Delete" placement="top">
-                <Toaster/>
+                
                 <div onClick={handlePlaylistClick} className='justify-center flex ml-auto mr-2 items-center h-10 w-10 rounded-lg cursor-pointer hover:bg-gradient-to-l from-yellow-400 to-purple-600 transition-colors duration-300'>
                     <TiDeleteOutline className="h-5 w-5 md:h-8 md:w-8 fill-white p-1" />
                 </div>
