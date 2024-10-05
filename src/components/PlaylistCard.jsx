@@ -3,19 +3,32 @@ import { playPause, setActiveSong } from '@/redux/playerSlice';
 import Image from 'next/image'
 import React from 'react'
 import { GiPlayButton } from 'react-icons/gi';
-import { IoIosCheckmarkCircleOutline, IoMdAdd } from 'react-icons/io';
 import { useDispatch, useSelector } from 'react-redux';
 import { togglePlaylist } from '@/redux/musicSlice';
 import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
+import { TiDeleteOutline } from "react-icons/ti";
+import { styled } from '@mui/material/styles';
+import Tooltip, {tooltipClasses } from '@mui/material/Tooltip';
+import Typography from '@mui/material/Typography';
+
+
+const BootstrapTooltip = styled(({ className, ...props }) => (
+    <Tooltip {...props} arrow classes={{ popper: className }} />
+  ))(({ theme }) => ({
+    [`& .${tooltipClasses.arrow}`]: {
+      color: theme.palette.common.black,
+    },
+    [`& .${tooltipClasses.tooltip}`]: {
+      backgroundColor: theme.palette.common.black,
+    },
+  }));
 
 function PlaylistCard({ song, data, i }) {
     const { data: session } = useSession()
     const dispatch = useDispatch();
     const router = useRouter();
     const { activeSong, isPlaying } = useSelector((state) => state.player);
-    const playlist = useSelector((state) => state.music.playlist)
-    const isPlaylist = playlist.some((p) => p.id === song.id)
 
     const handlePlayClick = () => {
         dispatch(setActiveSong({ song, data, i }));
@@ -47,13 +60,11 @@ function PlaylistCard({ song, data, i }) {
             <div onClick={handlePlayClick} className='bg-transparent justify-center flex flex-end mr-2 items-center h-10 w-10 rounded-lg cursor-pointer mt-1 hover:bg-gradient-to-l from-yellow-400 to-purple-600 transition-colors duration-300'>
                 <GiPlayButton className="h-5 w-5 md:h-8 md:w-8 fill-white p-1" />
             </div>
-            <div onClick={handlePlaylistClick} className='justify-center flex ml-auto mr-2 items-center h-10 w-10 rounded-lg cursor-pointer hover:bg-gradient-to-l from-yellow-400 to-purple-600 transition-colors duration-300'>
-                {isPlaylist ?
-                    (<IoIosCheckmarkCircleOutline className="h-5 w-5 md:h-8 md:w-8 fill-white p-1" />)
-                    :
-                    (<IoMdAdd className="h-5 w-5 md:h-8 md:w-8 fill-white p-1" />)
-                }
-            </div>
+            <BootstrapTooltip title="Delete" placement="top">
+                <div onClick={handlePlaylistClick} className='justify-center flex ml-auto mr-2 items-center h-10 w-10 rounded-lg cursor-pointer hover:bg-gradient-to-l from-yellow-400 to-purple-600 transition-colors duration-300'>
+                    <TiDeleteOutline className="h-5 w-5 md:h-8 md:w-8 fill-white p-1" />
+                </div>
+            </BootstrapTooltip>
         </div>
     )
 }
