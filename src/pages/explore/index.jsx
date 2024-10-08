@@ -3,8 +3,10 @@ import SongCard from '@/components/SongCard';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchMusic } from '@/redux/musicSlice';
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { useTranslations } from 'next-intl';
 
 function Explore() {
+  const t = useTranslations()
   const [artist, setArtist] = useState('');
   const [debouncedArtist, setDebouncedArtist] = useState('');
 
@@ -34,7 +36,7 @@ useEffect(() => {
   return (
     <div className="w-full h-full bg-gradient-to-t from-black to-purple-600 bg-opacity-50 rounded-lg overflow-y-auto">
       <div className='rounded-b-xl mx-12 mb-33 px-4 h-24 flex items-center gap-9 bg-gray-950 opacity-55'>
-        <h3 className='text-white font-semibold text-[24px] ml-12'>Search by Artist</h3>
+        <h3 className='text-white font-semibold text-[24px] ml-12'>{t("explore.search")}</h3>
         <input type="text" className='w-15 bg-transparent focus:outline-none focus:border-yellow-400 border-purple-500 border-2 rounded-xl text-white text-[18px] px-3' value={artist} onChange={(e)=>setArtist(e.target.value)} />
       </div>
       <div className='flex-wrap flex justify-center gap-2'>

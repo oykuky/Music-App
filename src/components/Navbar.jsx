@@ -4,12 +4,14 @@ import { IoIosHome } from "react-icons/io";
 import Image from 'next/image';
 import { signOut, useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
+import { useTranslations } from 'next-intl';
 
 
 function Navbar() {
   const [search,setSearch] = useState();
   const router = useRouter();
   const {data:session} = useSession();
+  const t = useTranslations();
   const logOut = async() =>{
     await signOut();
   }
@@ -26,7 +28,7 @@ function Navbar() {
           <IoSearch className="text-[25px] text-gray-500  hover:text-white "/>
           <input
             type="text" name="search" value={search}
-            placeholder='What do you want to play ?'
+            placeholder={t("navbar.search")}
             onChange={(e)=>setSearch(e.target.value)}
             className='outline-none text-white bg-transparent p-3 w-full'>
           </input>
@@ -37,7 +39,7 @@ function Navbar() {
         (
           <div className='flex justify-center items-center gap-2'>
             <div>
-             <button onClick={logOut} className="text-white hover:bg-gradient-to-l border-purple-500 border-2 from-yellow-400 to-purple-600 focus:outline-none focus:ring-4 focus:ring-yellow-300 font-semibold rounded-full text-m px-5 py-2.5 text-center me-2 dark:focus:ring-yellow-900 transition-all ">Log out</button>
+             <button onClick={logOut} className="text-white hover:bg-gradient-to-l border-purple-500 border-2 from-yellow-400 to-purple-600 focus:outline-none focus:ring-4 focus:ring-yellow-300 font-semibold rounded-full text-m px-5 py-2.5 text-center me-2 dark:focus:ring-yellow-900 transition-all ">{t("navbar.logout")}</button>
             </div>
             <div className='rounded-full '>
              <Image src='/noavatar.png' alt ="profileimg" width={40} height={40} className='rounded-full cursor-pointer'/>
@@ -46,7 +48,7 @@ function Navbar() {
         )
        : 
         (<div>
-          <button onClick={()=>router.push('/login')} className="text-white bg-yellow-400 hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300 font-semibold rounded-full text-m px-5 py-2.5 text-center me-2 mb-2 dark:focus:ring-yellow-900">Login</button>) 
+          <button onClick={()=>router.push('/login')} className="text-white bg-yellow-400 hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300 font-semibold rounded-full text-m px-5 py-2.5 text-center me-2 mb-2 dark:focus:ring-yellow-900">{t("navbar.login")}</button>) 
         </div> )
       }
      </div>

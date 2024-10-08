@@ -1,11 +1,5 @@
+export { default as tr } from "./tr.js";
+export { default as en } from "./en.js";
 
 
-export const en = {
-    // English translations
-    "greeting": "Hello"
-  };
-  
-  export const tr = {
-    // Spanish translations
-     "greeting": "Merhaba"
-  };
+export const defaultLocale ="tr";
