@@ -11,7 +11,6 @@ import { toggleFavorite, togglePlaylist } from '@/redux/musicSlice';
 import { useRouter } from 'next/navigation';
 import { styled } from '@mui/material/styles';
 import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
-import toast, { Toaster } from 'react-hot-toast';
 
 const BootstrapTooltip = styled(({ className, ...props }) => (
   <Tooltip {...props} arrow classes={{ popper: className }} />
@@ -62,7 +61,7 @@ function SongCard({ song, data, i }) {
         <Image src={song?.album.cover} alt={song.title} width={250} height={200} className='w-full h-auto object-cover rounded-lg' />
         <div className='flex justify-between px-1.5 mb-3 mt-1'>
           <BootstrapTooltip title="Add to favorites" placement="top">
-            <div onClick={handleFavoriteClick} className={`${isFavorite ? 'bg-gradient-to-l from-yellow-400 to-purple-600' : 'bg-black'} rounded-full cursor-pointer items-center flex justify-center mt-1 ml-1 hover:bg-yellow-400 transition-colors duration-300 w-10 h-10`}>
+            <div onClick={handleFavoriteClick} className={`${isFavorite ? ' bg-purple-600' : 'bg-black'} rounded-full cursor-pointer items-center flex justify-center mt-1 ml-1 hover:bg-yellow-400 transition-colors duration-300 w-10 h-10`}>
               <MdFavoriteBorder className="h-5 w-5 md:h-8 md:w-8 p-1 fill-white" />
             </div>
           </BootstrapTooltip>

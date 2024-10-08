@@ -10,6 +10,9 @@ import { useRouter } from "next/router";
 function Sidebar() {
   const router = useRouter();
   const isActive = (pathname) => router.pathname === pathname;
+  const changeLanguage = (lang) => {
+    window.location.href = `/${lang}`;
+  };
   return(
    <div className="bg-black bg-opacity-50 h-full w-1/5 rounded-lg text-white font-semibold gap-3 flex flex-col">
       <Link href="/" 
@@ -33,6 +36,8 @@ function Sidebar() {
         <MdOutlineExplore  className='h-8 w-8' />
         <h3>Explore</h3>
       </Link>
+      <button onClick={() => changeLanguage('en')}>English</button>
+      <button onClick={() => changeLanguage('tr')}>Türkçe</button>
   </div>  
   );
 }
