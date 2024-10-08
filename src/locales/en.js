@@ -22,8 +22,27 @@ const en= {
        },
        explore:{
         search:"Search for an artist",
-        
-       }
+       },
+       login:{
+        title:"Login",
+        username:"Username",
+        password:"Password",
+        loginButton:"Login",
+        haveAccQ:"Don't you have an account?",
+        span:"Register",
+        googleButton:"Sign in with Google"
+       },
+       register:{
+        title:"Register",
+        username:"Username",
+        password:"Password",
+        confirmpass:"Confirm Password",
+        email:"email",
+        button:"Register",
+        haveAccQ:" Already have an account?",
+        span:"Login"
+       },
+
 }
 
 export default en;

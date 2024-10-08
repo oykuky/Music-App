@@ -48,7 +48,7 @@ function Navbar() {
         )
        : 
         (<div>
-          <button onClick={()=>router.push('/login')} className="text-white bg-yellow-400 hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300 font-semibold rounded-full text-m px-5 py-2.5 text-center me-2 mb-2 dark:focus:ring-yellow-900">{t("navbar.login")}</button>) 
+          <button onClick={()=>router.push('/login')} className="text-white hover:bg-gradient-to-l border-purple-500 border-2 from-yellow-400 to-purple-600 focus:outline-none focus:ring-4 focus:ring-yellow-300 font-semibold rounded-full text-m px-5 py-2.5 text-center me-2 mb-2 dark:focus:ring-yellow-900">{t("navbar.login")}</button>) 
         </div> )
       }
      </div>

@@ -1,4 +1,5 @@
 import { useSession } from 'next-auth/react';
+import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React, { useEffect } from 'react';
@@ -6,6 +7,7 @@ import React, { useEffect } from 'react';
 function RegisterForm() {
   const router = useRouter();
   const { data: session } = useSession();
+  const t = useTranslations()
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -41,38 +43,38 @@ function RegisterForm() {
         <input 
           type="text" 
           name="username" 
-          placeholder="Username" 
+          placeholder={t("register.username")} 
           className='rounded-lg h-12 px-4 bg-gray-800 text-gray-200 border border-gray-700 focus:border-yellow-400 focus:outline-none'
         />
         <input 
           type="email" 
           name="email" 
-          placeholder="Email" 
+          placeholder={t("register.email")} 
           className='rounded-lg h-12 px-4 bg-gray-800 text-gray-200 border border-gray-700 focus:border-yellow-400 focus:outline-none'
         />
         <input 
           type="password" 
           name="password" 
-          placeholder="Password" 
+          placeholder={t("register.password")}
           className='rounded-lg h-12 px-4 bg-gray-800 text-gray-200 border border-gray-700 focus:border-yellow-400 focus:outline-none'
         />
         <input 
           type="password" 
           name="passwordRepeat" 
-          placeholder="Confirm Password" 
+          placeholder={t("register.confirmpass")}
           className='rounded-lg h-12 px-4 bg-gray-800 text-gray-200 border border-gray-700 focus:border-yellow-400 focus:outline-none'
         />
         <button 
           type="submit" 
           className="text-gray-900 bg-yellow-400 hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300 font-semibold rounded-lg text-sm px-5 py-3 text-center transition duration-300 ease-in-out transform hover:scale-105"
         >
-          Register
+          {t("register.button")}
         </button>
         <Link 
           className='text-sm text-gray-300 hover:text-white text-center' 
           href="/login"
         >
-          Already have an account? <span className='font-bold hover:text-yellow-400'>Log in</span>
+          {t("register.haveAccQ")} <span className='font-bold hover:text-yellow-400'>{t("register.span")}</span>
         </Link>
       </form>
     </div>
