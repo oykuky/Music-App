@@ -45,7 +45,7 @@ function PlaylistCard({ song, data, i }) {
     };
 
     return (
-        <div className='flex items-center mt-7 rounded-lg bg-purple-950 bg-opacity-60 w-full
+        <div className='flex items-center mt-7 rounded-lg bg-purple-950 w-full
        hover:bg-transparent h-[70px] md:h-[70px]
        cursor-pointer hover:shadow-xl transition-transform duration-300'>
             <div className='grid grid-cols-2 w-full gap-12 items-center '>
@@ -59,12 +59,12 @@ function PlaylistCard({ song, data, i }) {
                 {/* <p className='text-white font-semibold'>{song?.album.title}</p> */}
                 <p className='text-white font-semibold px-5'>{song?.artist.name}</p>
             </div>
-            <div onClick={handlePlayClick} className='bg-transparent justify-center flex flex-end mr-2 items-center h-10 w-10 rounded-lg cursor-pointer mt-1 hover:bg-gradient-to-l from-yellow-400 to-purple-600 transition-colors duration-300'>
+            <div onClick={handlePlayClick} className='bg-transparent justify-center flex flex-end mr-2 items-center h-10 w-10 rounded-lg cursor-pointer mt-1 hover:bg-pink-700 transition-colors duration-300'>
                 <GiPlayButton className="h-5 w-5 md:h-8 md:w-8 fill-white p-1" />
             </div>
             <BootstrapTooltip title="Delete" placement="top">
                 <Toaster/>
-                <div onClick={handlePlaylistClick} className='justify-center flex ml-auto mr-2 items-center h-10 w-10 rounded-lg cursor-pointer hover:bg-gradient-to-l from-yellow-400 to-purple-600 transition-colors duration-300'>
+                <div onClick={handlePlaylistClick} className='justify-center flex ml-auto mr-2 items-center h-10 w-10 rounded-lg cursor-pointer hover:bg-pink-700 transition-colors duration-300'>
                     <TiDeleteOutline className="h-5 w-5 md:h-8 md:w-8 fill-white p-1" />
                 </div>
             </BootstrapTooltip>

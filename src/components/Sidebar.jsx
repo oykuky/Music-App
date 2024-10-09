@@ -40,13 +40,11 @@ function Sidebar() {
         <MdOutlineExplore  className='h-8 w-8' />
         <h3>{t("sidebar.explore")}</h3>
       </Link>
-
       <Link className="p-2 m-2 mt-auto rounded-lg items-center justify-center flex flex-start hover:bg-purple-600 w-10 h-10 font-semibold text-white text-center"
         href={router.pathname}
         locale={otherLocale.locale}
       >{language}
       </Link>
-
   </div>  
   );
 }
