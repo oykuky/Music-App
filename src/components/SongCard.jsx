@@ -11,6 +11,7 @@ import { toggleFavorite, togglePlaylist } from '@/redux/musicSlice';
 import { useRouter } from 'next/navigation';
 import { styled } from '@mui/material/styles';
 import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
+import toast, { Toaster } from 'react-hot-toast';
 
 const BootstrapTooltip = styled(({ className, ...props }) => (
   <Tooltip {...props} arrow classes={{ popper: className }} />
@@ -24,7 +25,6 @@ const BootstrapTooltip = styled(({ className, ...props }) => (
 }));
 
 
-
 function SongCard({ song, data, i }) {
   const dispatch = useDispatch();
   const router = useRouter();
@@ -34,6 +34,10 @@ function SongCard({ song, data, i }) {
   const isFavorite = favorites.some((fav) => fav.id === song.id);
   const playlist = useSelector((state) => state.music.playlist)
   const isPlaylist = playlist.some((p) => p.id === song.id)
+  const notifyFav = () => toast('Song added to favorites !');
+  const notifydelFav = () => toast('Song deleted from favorites !');
+  const notifyPlaylist = () => toast('Song added to playlist !');
+  const notifydelPlaylist = () => toast('Song deleted from playlist !');
 
   const handlePlayClick = () => {
     dispatch(setActiveSong({ song, data, i }));
@@ -46,6 +50,9 @@ function SongCard({ song, data, i }) {
       return;
     }
     dispatch(toggleFavorite(song));
+    if(isFavorite) notifydelFav();
+    else notifyFav();
+    
   };
   const handlePlaylistClick = () => {
     if (!session) {
@@ -53,6 +60,8 @@ function SongCard({ song, data, i }) {
       return;
     }
     dispatch(togglePlaylist(song));
+    if(isPlaylist) notifydelPlaylist();
+    else notifyPlaylist();
   };
 
   return (
@@ -65,9 +74,11 @@ function SongCard({ song, data, i }) {
               <MdFavoriteBorder className="h-5 w-5 md:h-8 md:w-8 p-1 fill-white" />
             </div>
           </BootstrapTooltip>
-          <div onClick={handlePlayClick} className='bg-black justify-center flex items-center h-10 w-10 rounded-full cursor-pointer mt-1 hover:bg-yellow-400 transition-colors duration-300'>
-            <GiPlayButton className="h-5 w-5 md:h-8 md:w-8 fill-white p-1" />
-          </div>
+          <BootstrapTooltip title="Play music" placement="top">
+            <div onClick={handlePlayClick} className='bg-black justify-center flex items-center h-10 w-10 rounded-full cursor-pointer mt-1 hover:bg-yellow-400 transition-colors duration-300'>
+              <GiPlayButton className="h-5 w-5 md:h-8 md:w-8 fill-white p-1" />
+            </div>
+          </BootstrapTooltip>
         </div>
         <h2 className='text-white font-bold text-xl px-3 line-clamp-1'>{song?.title}</h2>
         <p className='text-white font-semibold px-3 mb-3'>{song?.artist.name}</p>

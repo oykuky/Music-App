@@ -1,6 +1,5 @@
-
 const en= {
-    home:{
+       home:{
         greeting:'Hello',
        },
        sidebar:{
@@ -42,7 +41,6 @@ const en= {
         haveAccQ:" Already have an account?",
         span:"Login"
        },
-
 }
 
 export default en;
