@@ -45,7 +45,7 @@ useEffect(() => {
             <div className="loader">
              <AiOutlineLoading3Quarters className="animate-spin text-4xl"/>
             </div>
-          </div>
+          </div> 
           )}
           {status === 'failed' && <div>Error: {error}</div>}
           {status === 'succeeded' && songs.map((song) => (
