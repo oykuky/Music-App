@@ -24,7 +24,7 @@ export default function AppWrapper({ children }) {
           <div className="h-[calc(100vh-5rem)] rounded-lg w-full md:h-[calc(100vh-10rem)]">
             {/* {children}
             {!isAuthPage && <MusicPlayer/>} */}
-            <div className="h-[calc(100vh-7rem)] rounded-xl w-full md:h-[calc(100vh-6rem)] flex flex-col">
+            <div className="h-[calc(100vh-7rem)] rounded-xl w-full md:h-[calc(100vh-7rem)] flex flex-col">
               <div className="flex-grow overflow-y-auto">
                 {children}
               </div>

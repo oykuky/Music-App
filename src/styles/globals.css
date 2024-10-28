@@ -5,7 +5,7 @@
 /* Firefox (uncomment to work in Firefox, although other properties will not work!)  */
 * {
   scrollbar-width: thin;
-  scrollbar-color: #000000 #fbe436;
+  scrollbar-color: transparent #fbe436;
 }
 
 /* Chrome, Edge and Safari */
