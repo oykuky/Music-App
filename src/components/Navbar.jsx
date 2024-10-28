@@ -48,7 +48,7 @@ function Navbar() {
             <div>
               <button
                 onClick={logOut}
-                className="text-m me-2 rounded-full border-2 border-purple-500 from-yellow-400 to-purple-600 px-5 py-2.5 text-center font-semibold text-white transition-all hover:bg-gradient-to-l focus:outline-none focus:ring-4 focus:ring-yellow-300 "
+                className="text-m me-2 rounded-full border-2 border-purple-500 px-5 py-2.5 text-center font-semibold text-white transition-all hover:bg-gradient-to-l focus:outline-none focus:ring-4 focus:ring-yellow-300 "
               >
                 {t("navbar.logout")}
               </button>
@@ -67,11 +67,10 @@ function Navbar() {
           <div>
             <button
               onClick={() => router.push("/login")}
-              className="text-m mb-2 me-2 rounded-full border-2 border-purple-500 from-yellow-400 to-purple-600 px-5 py-2.5 text-center font-semibold text-white hover:bg-gradient-to-l focus:outline-none focus:ring-4 focus:ring-yellow-300 "
+              className="text-m mb-2 me-2 rounded-full border-2 border-purple-500 px-5 py-2.5 text-center font-semibold text-white hover:bg-gradient-to-l focus:outline-none focus:ring-4 focus:ring-yellow-300 "
             >
               {t("navbar.login")}
             </button>
-            )
           </div>
         )}
       </div>

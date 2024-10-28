@@ -7,7 +7,6 @@ import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 import { useDispatch, useSelector } from 'react-redux';
 
 
-//favorites yerine playlist olucak
 function PlaylistLibrariy() {
   const dispatch = useDispatch();
   const { data: session } = useSession();

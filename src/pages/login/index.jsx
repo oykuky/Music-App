@@ -28,8 +28,8 @@ function Login() {
 
   return (
     <div className='bg-gray-900 min-h-screen flex justify-center items-center p-3'>
-      <div className='w-full max-w-md rounded-xl bg-gradient-to-r from-green-800 via-yellow-700 to-pink-800 p-1'>
-      <div className='bg-gray-900 rounded-lg p-8'>
+      <div className='w-full max-w-md rounded-xl p-1'>
+      <div className='bg-transparent border-[2px] border-purple-700 rounded-lg p-8'>
          <h1 className='text-3xl font-bold text-center text-white mb-8'>{t("login.title")}</h1>
          <LoginForm/>
         <button  onClick={login} type="button" className="text-white bg-gray-900 border w-full justify-center border-amber-500 hover:bg-amber-400 focus:ring-4 font-medium rounded-lg text-m px-5 py-2.5 text-center inline-flex items-center me-2 my-2">
@@ -40,7 +40,7 @@ function Login() {
         </button>
        </div>
       </div>
-      <Link className="mt-auto flex rounded-lg items-center justify-center bg-gradient-to-r from-green-600 via-yellow-700 to-pink-800 w-10 h-10 font-semibold text-white text-center"
+      <Link className="mt-auto flex rounded-lg items-center justify-center border-[2px] border-white hover:bg-purple-600 w-10 h-10 font-semibold text-white text-center"
         href={router.pathname}
         locale={otherLocale.locale}
       >{language}
