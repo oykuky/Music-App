@@ -45,8 +45,8 @@ function PlaylistCard({ song, data, i }) {
     };
 
     return (
-        <div className='flex items-center mt-7 rounded-lg bg-purple-950 w-full
-       hover:bg-transparent h-[70px] md:h-[70px]
+        <div className='flex items-center mt-7 rounded-lg bg-transparent border-purple-400 border-[1px] w-full
+       hover:border-pink-600 h-[70px] md:h-[70px]
        cursor-pointer hover:shadow-xl transition-transform duration-300'>
             <div className='grid grid-cols-2 w-full gap-12 items-center '>
                 <div className='flex flex-row items-center'>
